@@ -1,0 +1,17 @@
+#Script para ler arquivos JSON que estão no S3, em Python pelo Lambda.
+
+#Importar bibliotecas.
+import json
+import boto3
+
+#Definir o nome do Bucket e do arquivo(Key) que está no AWS S3.
+def lambda_handler(event, context):
+    BUCKET = 'desafio-bou'
+    KEY = 'Atletas.json'
+    
+    client = boto3.client('s3')
+    result = client.get_object(Bucket=BUCKET, Key=KEY)
+    
+    #Ler o objeto
+    text = result['Body'].read()#.decode('utf-8')
+    #convert to string
